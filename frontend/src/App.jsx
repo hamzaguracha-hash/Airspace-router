@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import MapView from "./MapView";
 import "./App.css";
@@ -30,6 +30,9 @@ export default function App() {
   const [closures, setClosures] = useState([]);
   const [news, setNews]         = useState([]);
   const [newsOpen, setNewsOpen] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(true);
+  const sheetRef = useRef(null);
+  const dragStart = useRef(null);
 
   // search
   const [originIata, setOriginIata] = useState("");
@@ -164,10 +167,36 @@ export default function App() {
     ? flights.find(f => f.id === selectedId)?.segments?.at(-1)?.arrival?.iataCode
     : checkResult?.arrival?.iata;
 
+  // Touch drag to open/close sheet on mobile
+  const onDragStart = (e) => {
+    dragStart.current = e.touches?.[0]?.clientY ?? e.clientY;
+  };
+  const onDragEnd = (e) => {
+    const end = e.changedTouches?.[0]?.clientY ?? e.clientY;
+    if (dragStart.current === null) return;
+    const diff = end - dragStart.current;
+    if (diff > 50)  setSheetOpen(false);
+    if (diff < -50) setSheetOpen(true);
+    dragStart.current = null;
+  };
+
   return (
     <div className="app">
-      {/* ══════════════ SIDEBAR ══════════════ */}
-      <aside className="sidebar">
+      {/* ══════════════ SIDEBAR / BOTTOM SHEET ══════════════ */}
+      <aside className={`sidebar ${sheetOpen ? "sheet-open" : "sheet-closed"}`} ref={sheetRef}>
+
+        {/* Drag handle — mobile only */}
+        <div
+          className="drag-handle"
+          onTouchStart={onDragStart}
+          onTouchEnd={onDragEnd}
+          onMouseDown={onDragStart}
+          onMouseUp={onDragEnd}
+          onClick={() => setSheetOpen(o => !o)}
+        >
+          <div className="drag-bar" />
+        </div>
+
         <div className="brand">
           <span className="brand-icon">✈</span>
           <span className="brand-name">AirspaceRouter</span>

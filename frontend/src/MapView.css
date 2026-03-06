@@ -72,8 +72,24 @@
 }
 .maplibregl-ctrl-group button {
   border-bottom-color: #334155 !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
 }
 .maplibregl-ctrl-icon { filter: invert(1) !important; }
+
+/* Push zoom controls above the bottom sheet on mobile */
+@media (max-width: 768px) {
+  .maplibregl-ctrl-top-right {
+    top: auto !important;
+    bottom: 145px !important;
+    right: 10px !important;
+  }
+  .maplibregl-ctrl-group button {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+  .map-legend { bottom: 145px; right: 10px; }
+}
 
 /* ── Map legend ── */
 .map-legend {
