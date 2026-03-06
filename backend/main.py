@@ -72,6 +72,71 @@ AIRPORTS = {
     "GMMN": {"name": "Casablanca Mohammed V",   "iata": "CMN", "lat": 33.368,  "lon":  -7.590},
     "KEWR": {"name": "New York Newark",         "iata": "EWR", "lat": 40.690,  "lon": -74.175},
     "KATL": {"name": "Atlanta Hartsfield",      "iata": "ATL", "lat": 33.637,  "lon": -84.428},
+    # More Middle East hubs
+    "OJAI": {"name": "Amman Marka",             "iata": "ADJ", "lat": 31.972, "lon": 35.991},
+    "OEDF": {"name": "Dammam King Fahd",        "iata": "DMM", "lat": 26.471, "lon": 49.799},
+    "OEMA": {"name": "Madinah",                 "iata": "MED", "lat": 24.554, "lon": 39.705},
+    "OEAH": {"name": "Al Ahsa",                 "iata": "HOF", "lat": 25.285, "lon": 49.485},
+    "OMFM": {"name": "Fujairah",                "iata": "FJR", "lat": 25.112, "lon": 56.324},
+    "OMSJ": {"name": "Sharjah",                 "iata": "SHJ", "lat": 25.328, "lon": 55.517},
+    "OMRK": {"name": "Ras Al Khaimah",          "iata": "RKT", "lat": 25.615, "lon": 55.939},
+    # More European hubs (common Amadeus layovers)
+    "EGPD": {"name": "Aberdeen",                "iata": "ABZ", "lat": 57.202, "lon": -2.198},
+    "EGNJ": {"name": "Humberside",              "iata": "HUY", "lat": 53.575, "lon": -0.351},
+    "EGNT": {"name": "Newcastle",               "iata": "NCL", "lat": 55.037, "lon": -1.692},
+    "EGAA": {"name": "Belfast International",   "iata": "BFS", "lat": 54.657, "lon": -6.216},
+    "EIDW": {"name": "Dublin",                  "iata": "DUB", "lat": 53.421, "lon": -6.270},
+    "LSGG": {"name": "Geneva",                  "iata": "GVA", "lat": 46.238, "lon":  6.109},
+    "LIMC": {"name": "Milan Malpensa",          "iata": "MXP", "lat": 45.630, "lon":  8.723},
+    "LIME": {"name": "Milan Bergamo",           "iata": "BGY", "lat": 45.674, "lon":  9.704},
+    "LIPZ": {"name": "Venice",                  "iata": "VCE", "lat": 45.505, "lon": 12.352},
+    "LFMN": {"name": "Nice",                    "iata": "NCE", "lat": 43.665, "lon":  7.215},
+    "LFLL": {"name": "Lyon",                    "iata": "LYS", "lat": 45.726, "lon":  5.091},
+    "EDDT": {"name": "Berlin Brandenburg",      "iata": "BER", "lat": 52.366, "lon": 13.503},
+    "EDDH": {"name": "Hamburg",                 "iata": "HAM", "lat": 53.630, "lon":  9.988},
+    "EDDL": {"name": "Dusseldorf",              "iata": "DUS", "lat": 51.289, "lon":  6.767},
+    "EDDS": {"name": "Stuttgart",               "iata": "STR", "lat": 48.690, "lon":  9.222},
+    "EPWA": {"name": "Warsaw Chopin",           "iata": "WAW", "lat": 52.166, "lon": 20.967},
+    "LKPR": {"name": "Prague",                  "iata": "PRG", "lat": 50.101, "lon": 14.260},
+    "LHBP": {"name": "Budapest",               "iata": "BUD", "lat": 47.433, "lon": 19.261},
+    "LROP": {"name": "Bucharest",              "iata": "OTP", "lat": 44.572, "lon": 26.102},
+    "LBSF": {"name": "Sofia",                  "iata": "SOF", "lat": 42.696, "lon": 23.411},
+    "LGAV": {"name": "Athens",                 "iata": "ATH", "lat": 37.936, "lon": 23.944},
+    "LCPH": {"name": "Paphos",                 "iata": "PFO", "lat": 34.718, "lon": 32.486},
+    "LCLK": {"name": "Larnaca",               "iata": "LCA", "lat": 34.875, "lon": 33.625},
+    "GCTS": {"name": "Tenerife South",         "iata": "TFS", "lat": 28.045, "lon":-16.572},
+    "GCFV": {"name": "Fuerteventura",          "iata": "FUE", "lat": 28.453, "lon":-13.864},
+    "GCLP": {"name": "Gran Canaria",           "iata": "LPA", "lat": 27.932, "lon":-15.387},
+    # More Africa
+    "HECA": {"name": "Cairo International",    "iata": "CAI", "lat": 30.122, "lon": 31.406},
+    "HKJK": {"name": "Nairobi Jomo Kenyatta",  "iata": "NBO", "lat": -1.319, "lon": 36.928},
+    "FACT": {"name": "Cape Town",              "iata": "CPT", "lat":-33.965, "lon": 18.602},
+    "FALE": {"name": "Durban",                 "iata": "DUR", "lat":-29.614, "lon": 31.120},
+    "FMMI": {"name": "Antananarivo",           "iata": "TNR", "lat":-18.797, "lon": 47.479},
+    # More Asia
+    "RPLL": {"name": "Manila Ninoy Aquino",    "iata": "MNL", "lat": 14.509, "lon": 121.019},
+    "VVTS": {"name": "Ho Chi Minh City",       "iata": "SGN", "lat": 10.819, "lon": 106.652},
+    "VVNB": {"name": "Hanoi Noi Bai",         "iata": "HAN", "lat": 21.221, "lon": 105.807},
+    "ZGGG": {"name": "Guangzhou Baiyun",       "iata": "CAN", "lat": 23.392, "lon": 113.299},
+    "ZSPD": {"name": "Shanghai Pudong",        "iata": "PVG", "lat": 31.143, "lon": 121.805},
+    "ZSSS": {"name": "Shanghai Hongqiao",      "iata": "SHA", "lat": 31.198, "lon": 121.336},
+    "RCTP": {"name": "Taipei Taoyuan",         "iata": "TPE", "lat": 25.077, "lon": 121.233},
+    "VTBD": {"name": "Bangkok Don Mueang",     "iata": "DMK", "lat": 13.913, "lon": 100.607},
+    "WADD": {"name": "Bali Ngurah Rai",        "iata": "DPS", "lat": -8.748, "lon": 115.167},
+    "YMML": {"name": "Melbourne",              "iata": "MEL", "lat":-37.673, "lon": 144.843},
+    "YBBN": {"name": "Brisbane",               "iata": "BNE", "lat":-27.384, "lon": 153.118},
+    "YPPH": {"name": "Perth",                  "iata": "PER", "lat":-31.940, "lon": 115.967},
+    # North America extras
+    "KBOS": {"name": "Boston Logan",           "iata": "BOS", "lat": 42.365, "lon": -71.010},
+    "KDFW": {"name": "Dallas Fort Worth",      "iata": "DFW", "lat": 32.897, "lon": -97.038},
+    "KIAD": {"name": "Washington Dulles",      "iata": "IAD", "lat": 38.944, "lon": -77.456},
+    "KDCA": {"name": "Washington Reagan",      "iata": "DCA", "lat": 38.852, "lon": -77.037},
+    "KPHL": {"name": "Philadelphia",           "iata": "PHL", "lat": 39.872, "lon": -75.241},
+    "KMSP": {"name": "Minneapolis",            "iata": "MSP", "lat": 44.882, "lon": -93.222},
+    "KDEN": {"name": "Denver",                 "iata": "DEN", "lat": 39.856, "lon":-104.674},
+    "KPHX": {"name": "Phoenix",               "iata": "PHX", "lat": 33.437, "lon":-112.008},
+    "KMCO": {"name": "Orlando",               "iata": "MCO", "lat": 28.429, "lon": -81.309},
+    "KLGA": {"name": "New York LaGuardia",     "iata": "LGA", "lat": 40.777, "lon": -73.873},
     # UK airports
     "EGCC": {"name": "Manchester",              "iata": "MAN", "lat": 53.354,  "lon":  -2.275},
     "EGBB": {"name": "Birmingham",              "iata": "BHX", "lat": 52.454,  "lon":  -1.748},
@@ -301,8 +366,22 @@ def find_route(origin_icao, dest_icao, closures):
 
 def check_segment_safety(iata1: str, iata2: str, closures: list):
     c1, c2 = IATA_COORDS.get(iata1), IATA_COORDS.get(iata2)
+
+    # If both unknown, we can't check — default safe rather than alarming user
+    if not c1 and not c2:
+        return "safe", []
+
+    # If one endpoint is missing, check whether the known airport itself
+    # sits inside a closure zone as a best-effort signal
     if not c1 or not c2:
-        return "unknown", []
+        known = c1 or c2
+        affected = []
+        for zone in [z for z in closures if z.get("polygon")]:
+            if point_in_polygon(known[0], known[1], zone["polygon"]):
+                affected.append(zone)
+        if not affected:
+            return "safe", []
+        return ("avoid" if any(z["risk"] == "high" for z in affected) else "caution"), affected
     affected = []
     for zone in closures:
         if not zone.get("polygon"):
