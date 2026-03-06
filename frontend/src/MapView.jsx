@@ -117,7 +117,7 @@ export default function MapView({ closures, mainPath, safePath, mapSafety, depMa
         ref={mapRef}
         initialViewState={{ longitude: 45, latitude: 28, zoom: 4 }}
         style={{ width: '100%', height: '100%' }}
-        mapStyle="https://tiles.openfreemap.org/styles/dark"
+        mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
         onLoad={() => setMapLoaded(true)}
         interactiveLayerIds={mapLoaded ? ['closure-fill'] : []}
         onClick={e => {
