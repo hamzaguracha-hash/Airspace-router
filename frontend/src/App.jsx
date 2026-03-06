@@ -1,54 +1,13 @@
-import { useState, useEffect, useRef } from "react";
-import { MapContainer, TileLayer, Polygon, Marker, Popup, Tooltip, useMap } from "react-leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-import "leaflet-ant-path";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import MapView from "./MapView";
 import "./App.css";
-
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  iconUrl:       "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  shadowUrl:     "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-});
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
 const DEFAULT_DATE = tomorrow.toISOString().split("T")[0];
 
 // ── Safety colors ──────────────────────────────────────────────────────────────
-const SAFETY_COLOR = { safe: "#22c55e", caution: "#f97316", avoid: "#ef4444" };
-const RISK_COLOR   = (risk) => risk === "high" ? "#ef4444" : "#f97316";
-
-// ── Animated route using leaflet-ant-path ─────────────────────────────────────
-function AnimatedRoute({ positions, color, weight = 3, dashed = false }) {
-  const map = useMap();
-  const layerRef = useRef(null);
-  useEffect(() => {
-    if (!positions || positions.length < 2) return;
-    if (layerRef.current) { map.removeLayer(layerRef.current); }
-    layerRef.current = L.polyline.antPath(positions, {
-      color,
-      weight,
-      delay:      1200,
-      dashArray:  dashed ? [8, 20] : [12, 22],
-      pulseColor: "rgba(255,255,255,0.25)",
-      opacity:    0.9,
-    }).addTo(map);
-    return () => { if (layerRef.current) map.removeLayer(layerRef.current); };
-  }, [positions, color, map]);
-  return null;
-}
-
-// ── Auto-fit map bounds ───────────────────────────────────────────────────────
-function FitBounds({ coords }) {
-  const map = useMap();
-  useEffect(() => {
-    if (coords?.length > 1) map.fitBounds(L.latLngBounds(coords), { padding: [60, 60] });
-  }, [coords, map]);
-  return null;
-}
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function SafeBadge({ status }) {
@@ -95,7 +54,6 @@ export default function App() {
   const [mainPath,   setMainPath]   = useState([]);
   const [safePath,   setSafePath]   = useState([]);
   const [mapSafety,  setMapSafety]  = useState("safe");
-  const [fitCoords,  setFitCoords]  = useState(null);
   const [depMarker,  setDepMarker]  = useState(null);
   const [arrMarker,  setArrMarker]  = useState(null);
 
@@ -150,7 +108,6 @@ export default function App() {
     });
     const unique = coords.filter((c, i) => !i || JSON.stringify(c) !== JSON.stringify(coords[i-1]));
     setMainPath(unique);
-    setFitCoords(unique);
     setMapSafety(flight.safety);
     setDepMarker(unique[0]);
     setArrMarker(unique[unique.length - 1]);
@@ -180,7 +137,6 @@ export default function App() {
       if (r.data.map_path?.length > 1) {
         const path = r.data.map_path;
         setMainPath(path);
-        setFitCoords(path);
         setMapSafety(r.data.safety);
         setDepMarker(path[0]);
         setArrMarker(path[path.length - 1]);
@@ -401,41 +357,16 @@ export default function App() {
 
       {/* ══════════════ MAP ══════════════ */}
       <main className="map-wrap">
-        <MapContainer center={[28, 45]} zoom={4} style={{ height: "100%", width: "100%" }}>
-          <TileLayer
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-            attribution='&copy; <a href="https://carto.com/">CARTO</a>'
-          />
-
-          {/* Closure zones */}
-          {closures.filter(c => c.polygon?.length > 2).map(c => (
-            <Polygon key={c.id}
-              positions={c.polygon.map(p => [p[0], p[1]])}
-              pathOptions={{ color: RISK_COLOR(c.risk), fillColor: RISK_COLOR(c.risk), fillOpacity: 0.2, weight: 2 }}>
-              <Tooltip permanent direction="center" className="zone-label">{c.country}</Tooltip>
-              <Popup>
-                <strong>{c.name}</strong><br />
-                Risk: <strong style={{ color: RISK_COLOR(c.risk) }}>{c.risk.toUpperCase()}</strong>
-              </Popup>
-            </Polygon>
-          ))}
-
-          {/* Main flight route — animated, color-coded by safety */}
-          {mainPath.length > 1 && (
-            <AnimatedRoute positions={mainPath} color={SAFETY_COLOR[mapSafety] || "#22c55e"} weight={3} />
-          )}
-
-          {/* Safe alternative route — animated green dashed */}
-          {safePath.length > 1 && (
-            <AnimatedRoute positions={safePath} color="#22c55e" weight={2} dashed />
-          )}
-
-          {fitCoords && <FitBounds coords={fitCoords} />}
-
-          {depMarker && <Marker position={depMarker}><Popup>Departure: {depIata}</Popup></Marker>}
-          {arrMarker && <Marker position={arrMarker}><Popup>Arrival: {arrIata}</Popup></Marker>}
-        </MapContainer>
-
+        <MapView
+          closures={closures}
+          mainPath={mainPath}
+          safePath={safePath}
+          mapSafety={mapSafety}
+          depMarker={depMarker}
+          arrMarker={arrMarker}
+          depIata={depIata}
+          arrIata={arrIata}
+        />
       </main>
     </div>
   );

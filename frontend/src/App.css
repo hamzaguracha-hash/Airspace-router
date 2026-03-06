@@ -141,10 +141,3 @@ html, body, #root { height: 100%; font-family: 'Segoe UI', sans-serif; backgroun
 .ml-dot  { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 .ml-line { width: 18px; height: 3px; border-radius: 2px; flex-shrink: 0; }
 
-/* ── Zone labels ── */
-.zone-label {
-  background: transparent !important; border: none !important; box-shadow: none !important;
-  font-size: 0.62rem !important; font-weight: 700 !important;
-  color: #fca5a5 !important; text-transform: uppercase; letter-spacing: 0.04em; pointer-events: none;
-}
-.zone-label::before { display: none !important; }
